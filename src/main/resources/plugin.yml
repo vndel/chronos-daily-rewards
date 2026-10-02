@@ -1,0 +1,25 @@
+name: ChronosDailyRewards
+version: '${project.version}'
+main: com.fivemcodehub.chronos.ChronosPlugin
+api-version: '1.20'
+authors: [vndel]
+description: Timezone-aware streak rewards with offline UUID resolution
+website: https://team.fivemcodehub.com
+
+commands:
+  daily:
+    description: Claim the daily reward
+    usage: /daily
+    permission: chronos.claim
+  chronos:
+    description: Administrative reward tools
+    usage: /chronos <reload|reset|inspect> [player]
+    permission: chronos.admin
+
+permissions:
+  chronos.claim:
+    description: Claim daily rewards
+    default: true
+  chronos.admin:
+    description: Administrative access
+    default: op
