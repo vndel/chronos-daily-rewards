@@ -1,0 +1,53 @@
+# ───────────────────────────────────────────────────────────────
+#  ChronosDailyRewards
+#
+#  Day boundaries resolve in the timezone below, not in UTC. For a
+#  regional community that matters: a UTC reset lands in the middle
+#  of prime time rather than overnight.
+# ───────────────────────────────────────────────────────────────
+
+# Any IANA zone id. Handles daylight saving automatically.
+# Examples: Asia/Riyadh, Europe/Berlin, America/New_York, UTC
+timezone: 'Asia/Riyadh'
+
+streak:
+  # Missed days forgiven before a streak breaks. 0 = strictly daily.
+  # 1 is a reasonable kindness: one missed day does not erase a month.
+  grace-days: 1
+
+persistence:
+  # 6000 ticks = 5 minutes. Only writes when state actually changed.
+  autosave-interval-ticks: 6000
+
+# Tiers are "streak >= key" thresholds; the highest match wins, so a
+# long streak never silently falls back to the day-1 reward.
+#
+# Placeholders: %player%  %uuid%  %tier%
+tiers:
+  1:
+    name: 'Day One'
+    commands:
+      - 'give %player% bread 8'
+      - 'ecoadmin give %player% 250'
+  3:
+    name: 'Three Day Streak'
+    commands:
+      - 'give %player% iron_ingot 8'
+      - 'ecoadmin give %player% 750'
+  7:
+    name: 'Weekly Dedication'
+    commands:
+      - 'give %player% diamond 3'
+      - 'ecoadmin give %player% 2500'
+      - 'lp user %player% permission settemp essentials.fly true 7d'
+  14:
+    name: 'Fortnight Veteran'
+    commands:
+      - 'give %player% diamond_block 1'
+      - 'ecoadmin give %player% 6000'
+  30:
+    name: 'Monthly Legend'
+    commands:
+      - 'give %player% netherite_ingot 2'
+      - 'ecoadmin give %player% 20000'
+      - 'lp user %player% parent addtemp veteran 30d'
