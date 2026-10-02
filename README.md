@@ -78,6 +78,21 @@ mvn clean package
 Drop the jar in `plugins/`, start the server once to generate `config.yml`,
 then adjust and run `/chronos reload` where supported.
 
+## Verification
+
+```bash
+./verify.sh          # builds, runs tests, checks bytecode version
+```
+
+**7 unit tests** cover the streak transitions and the date arithmetic that the
+plugin exists to get right:
+
+- A UTC day boundary and an `Asia/Riyadh` boundary genuinely differ at 22:30Z —
+  the test asserts both, which is the whole reason a `ZoneId` is configurable.
+- Month end, year end and the 2024 leap day all advance by exactly one day.
+- A DST spring-forward resolves rather than producing an invalid local time.
+- A broken streak resets to 1 while preserving the previous best.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
